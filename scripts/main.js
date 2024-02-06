@@ -4,7 +4,7 @@ const categoryListFormEl = document.querySelector('#categoryListForm');
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM IS READY');
 
-    const apiurl = 'https://api.chucknorris.io/jokes/random?category=dev';
+    const apiUrl = 'https://api.chucknorris.io/jokes/random?category=dev';
     generateQuote(apiUrl);
 
     const categoriesUrl = 'https://api.chucknorris.io/jokes/categories';
@@ -17,12 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const newCategory = this.querySelector('select').value;
         const apiUrl = `https://api.chucknorris.io/jokes/random?category=${newCategory}`;
         generateQuote(apiUrl);
-    })
-});
-
-function generateQuote() {
+    });
 
 
+function generateQuote(apiUrl) {
     get(apiUrl).then(function (response) {
         chuckQuote.innerText = response.value
     });
@@ -38,7 +36,7 @@ function generateCategoryList(categoryArray) {
             return category;
         }
     });
-    filterdCategories.map(function (category) {
+    filteredCategories.map(function (category) {
         // create an option element
         const option = document.createElement('option');
         // define option attributes
@@ -46,6 +44,11 @@ function generateCategoryList(categoryArray) {
         option.text = category;
         // append the option to the <select>
         selectEl.appendChild(option);
+        categoryListFormEl.append(selectEl);
+        // append the <select> to the <form>   
+        
     });
-    // append the <select> to the <form>
-    categoryListFormEl.append(selectEl);
+    
+};
+
+});
