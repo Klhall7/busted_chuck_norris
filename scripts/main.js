@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     categoryListFormEl.addEventListener('submit', function (event) {
+        event.preventDefault();
         const newCategory = this.querySelector('select').value;
         const apiUrl = `https://api.chucknorris.io/jokes/random?category=${newCategory}`;
         generateQuote(apiUrl);
@@ -21,8 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function generateQuote(apiUrl) {
+    const chuckQuote2 =document.querySelector('#chuckQuote');
+
     get(apiUrl).then(function (response) {
-        chuckQuote.innerText = response.value
+        chuckQuote2.innerText = response.value
     });
 }
 
